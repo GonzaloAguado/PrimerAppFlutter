@@ -28,15 +28,41 @@ class _ContadorPageState extends State <ContadorPage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-
-        onPressed: () {
-          setState(() {
-            _conteo ++;
-          });
-        },
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: _crearBotones()
     ) ;
+  }
+
+  /**
+   * Metodo que devuelve la fila de botones.
+   */
+  Widget _crearBotones() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        SizedBox(width: 30.0,),
+        FloatingActionButton(child: Icon(Icons.replay), onPressed: _reset,),
+        Expanded(child: SizedBox()),
+        FloatingActionButton(child: Icon(Icons.remove), onPressed: _sustraer,),
+        SizedBox(width: 10.0,),
+        FloatingActionButton(child: Icon(Icons.add), onPressed: _agregar,),
+      ],
+    );
+  }
+
+  void _agregar(){
+    setState(() => _conteo++ );
+  }
+
+  void _sustraer(){
+    setState(() {
+      if (_conteo != 0){
+        _conteo--;
+      }
+    });
+  }
+
+  void _reset(){
+    setState(() => _conteo = 0 );
   }
 }
